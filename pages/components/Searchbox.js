@@ -15,6 +15,7 @@ function Searchbox() {
                 pathname: "/search",
                 query: { name: searchBoxInput },
             });
+            
         }
     };
     
@@ -22,7 +23,7 @@ function Searchbox() {
         <div className={styles.searchbox}>
             <div className={styles.selectbox}>
                 <select id="years" name="years" onChange={(e) => setSelectYear(e.target.value)}>
-                    <option value="" disabled selected hidden>
+                    <option  value="" hidden>
                         Year
                     </option>
                     <option value="2020">2020</option>
@@ -33,7 +34,7 @@ function Searchbox() {
             </div>
             <div className={styles.selectbox}>
                 <select id="types" name="types" onChange={(e) => setCategory(e.target.value)}>
-                    <option value="" disabled selected hidden>
+                    <option value="" hidden>
                         Type
                     </option>
                     <option value="Action">Action</option>

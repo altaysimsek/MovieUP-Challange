@@ -27,7 +27,7 @@ function Navigation() {
                             className="mr-5"
                             name="searchbox"
                         ></input>
-                        <i class="bx bx-search"></i>
+                        <i className="bx bx-search"></i>
                     </div>
                 </Container>
             </Navbar>

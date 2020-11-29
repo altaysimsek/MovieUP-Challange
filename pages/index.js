@@ -65,7 +65,7 @@ export default function Home() {
             <Container fluid>
                 <Carousel>
                     {popMovies.map((movies) => (
-                        <Carousel.Item interval={3500}>
+                        <Carousel.Item   interval={3500}>
                             <div className="d-flex my-5 justify-content-center">
                                 <PopularMovieCard
                                     key={movies.id}

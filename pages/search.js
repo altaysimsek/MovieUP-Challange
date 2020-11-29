@@ -5,8 +5,21 @@ import styles from "../styles/SearchResult.module.scss";
 import Head from "next/head";
 import MovieCard from "./components/MovieCard";
 
+import React, { useState, useEffect } from "react";
+
 export default function Search() {
     const router = useRouter();
+    const [searchedMovie, setSearchedMovie] = useState([]);
+
+    useEffect(() => {
+        // Update the document title using the browser API
+        console.log(router.query.name)
+        fetch("http://www.omdbapi.com/?apikey=3e701bcb&s=" + router.query.name)
+            .then((data) => data.json())
+            .then((results) => {
+                console.log(results.Search)
+                setSearchedMovie(results)});
+    },[router.query.name]);
 
     return (
         <>
@@ -24,12 +37,7 @@ export default function Search() {
                 <div className={styles.title}>
                     Search result <span>{router.query.name}</span>
                 </div>
-                <div className={styles.movielist}>
-                    <MovieCard></MovieCard>
-                    <MovieCard></MovieCard>
-                    <MovieCard></MovieCard>
-                    <MovieCard></MovieCard>
-                </div>
+                <div className={styles.movielist}>{searchedMovie.length > 0 && searchedMovie.map(movie => (movie))}</div>
             </Container>
         </>
     );

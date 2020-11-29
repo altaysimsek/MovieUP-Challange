@@ -38,7 +38,7 @@ export default function PopularMovieCard(props) {
                     </div>
                     <div className={styles.footer}>
                         <button className={styles.btndefault}>
-                            <i class="bx bxs-heart"></i>
+                            <i className="bx bxs-heart"></i>
                             Add to favorite
                         </button>
                         <a href="#">View Details</a>
