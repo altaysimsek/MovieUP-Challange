@@ -16,3 +16,19 @@
     }
 
 }
+.popularMovies{
+    display: flex;
+    margin:2.5rem 0rem;
+    h2{
+        font-weight: 600;
+        color:black;
+        font-size:35px;
+        margin-right: auto;
+    }
+    span{
+        color:#F5C518;
+        font-size:16px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+}
