@@ -1,9 +1,39 @@
 import Head from "next/head";
-import { Container } from "react-bootstrap";
+//Bootstrap
+import { Container, Carousel } from "react-bootstrap";
+//External components
 import Searchbox from "./components/Searchbox";
+import PopularMovieCard from "./components/PopularMovieCard";
+//Css
 import styles from "../styles/Home.module.scss";
+import React, { useState } from "react";
 
 export default function Home() {
+    const [popMovies, setPopMovies] = useState([
+        {
+            id: 1,
+            imdbRate: "8.8",
+            imgUrl:
+                "https://i.pinimg.com/originals/b7/f1/ef/b7f1efa3851a3ffb08cb4ff923226a92.jpg",
+            category: ["Action", "Biograph"],
+            year:"2020",
+            movieName: "The Godfather",
+            description:
+                "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son",
+        },
+        {
+            id: 1,
+            imgUrl:
+                "https://images-na.ssl-images-amazon.com/images/I/81cw8NVT36L._SX342_.jpg",
+            imdbRate: "8.8",
+            year:"2019",
+            category: ["Action", "Race"],
+            movieName: "The TokyoDrift",
+            description:
+                "Arabalar burada yarışır",
+        },
+    ]);
+
     return (
         <>
             <Head>
@@ -26,9 +56,25 @@ export default function Home() {
                     <Searchbox></Searchbox>
                 </div>
                 <div className={styles.popularMovies}>
-                  <h2>Popular Movies</h2>
-                  <span>View more <i class='bx bx-right-arrow-alt' ></i></span>
+                    <h2>Popular Movies</h2>
+                    <span>
+                        View more <i className="bx bx-right-arrow-alt"></i>
+                    </span>
                 </div>
+            </Container>
+            <Container fluid>
+                <Carousel>
+                    {popMovies.map((movies) => (
+                        <Carousel.Item interval={3500}>
+                            <div className="d-flex my-5 justify-content-center">
+                                <PopularMovieCard
+                                    key={movies.id}
+                                    details={movies}
+                                ></PopularMovieCard>
+                            </div>
+                        </Carousel.Item>
+                    ))}
+                </Carousel>
             </Container>
         </>
     );

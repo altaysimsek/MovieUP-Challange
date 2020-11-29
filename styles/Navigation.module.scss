@@ -23,3 +23,9 @@
         }
     }
 }
+
+@media only screen and (max-width:980px) {
+    .searchbox{
+        display: none;
+    }
+}

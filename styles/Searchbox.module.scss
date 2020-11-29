@@ -46,7 +46,7 @@
             background-color: #f3f3f3;
             border-radius: 8px;
             
-            padding-right: 3rem;
+            padding-right: 1.5rem;
             margin-right:2rem;
         }
         
@@ -68,5 +68,10 @@
             font-size:18px;
 
         }
+    }
+}
+@media only screen and (max-width:770px) {
+    .selectbox{
+        display: none;
     }
 }
