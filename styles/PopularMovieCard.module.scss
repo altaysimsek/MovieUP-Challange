@@ -1,8 +1,8 @@
 .popularMovieCard{
     display: flex;
-    
+    align-items: center;
     max-width: 1100px;
-    min-width: 950px;
+    min-width: 200px;
     padding:2.5rem 2rem;
     border-radius: 10px;
     background-color:#FAFAFA;
@@ -21,7 +21,7 @@
                 margin-right: auto;
                 span{
                     margin-left:1rem;
-                    ont-size: 18px;
+                    font-size: 18px;
                     font-weight: 600;
                 }
             }
@@ -109,5 +109,21 @@
         border-radius: 20px;
         margin-right: 5rem;
         
+    }
+}
+@media only screen and (max-width:920px) {
+    .popularMovieCard{
+        .details{
+            .heading{
+                .category{
+                    display: none;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width:770px) {
+    .popularMovieCard{
+        flex-direction: column;
     }
 }

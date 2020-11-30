@@ -1,8 +1,7 @@
 .banner{
     background: linear-gradient(90deg, rgba(245, 197, 24, 0.26) 22.24%, rgba(251, 247, 252, 0) 100%);
     padding:1rem;
-    padding-left: 15rem;
-    padding-right: 15rem;
+    
     .directory{
         color: #F5C518;
         font-weight: 600;
@@ -23,4 +22,10 @@
     flex-direction: row;
     flex-wrap: wrap;
     
+    
+}
+@media only screen and (max-width:1200px) {
+    .movielist{
+        justify-content: center;
+    }
 }
