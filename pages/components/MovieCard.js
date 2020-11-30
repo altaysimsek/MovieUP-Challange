@@ -1,5 +1,17 @@
 import styles from "../../styles/MovieCard.module.scss";
+import { useRouter } from "next/router";
+
 export default function MovieCard({movieDetail}) {
+    const router = useRouter();
+    
+    const handleClick = () => {
+        router.push({
+            pathname: "/detail",
+            query: {id: movieDetail.imdbID},
+        });
+    }
+
+
     return (
         <>
             <div className={styles.movieCard}>
@@ -7,9 +19,10 @@ export default function MovieCard({movieDetail}) {
                     <img
                         src={movieDetail.Poster == "N/A" ? "/image/movieLogo.png" : movieDetail.Poster}
                         alt="Movie Poster"
+                        onClick={handleClick}
                     ></img>
                     <div className={styles.details}>
-                        <span>Biography</span>
+                        <span>{movieDetail.Genre}</span>
                         <button>
                             <i className="bx bx-heart"></i>
                         </button>

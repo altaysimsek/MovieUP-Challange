@@ -6,35 +6,47 @@ function Searchbox() {
     const [selectYear, setSelectYear] = useState("");
     const [selectCategory, setCategory] = useState("");
     const router = useRouter();
-    
-    
+
     const handleClick = (e) => {
         setSearchBoxInput("");
         if (searchBoxInput.trim() != "") {
+            let queryObj = {name: searchBoxInput}
+            if(selectYear != ""){
+               queryObj = { name: searchBoxInput, year: selectYear }
+            }
             router.push({
                 pathname: "/search",
-                query: { name: searchBoxInput },
+                query: queryObj,
             });
-            
         }
     };
-    
+    let year = [];
+    for (let i = 2020; i > 1900; i--) {
+        year.push(i);
+    }
     return (
         <div className={styles.searchbox}>
             <div className={styles.selectbox}>
-                <select id="years" name="years" onChange={(e) => setSelectYear(e.target.value)}>
-                    <option  value="" hidden>
+                <select
+                    id="years"
+                    name="years"
+                    onChange={(e) => setSelectYear(e.target.value)}
+                >
+                    <option value="" >
                         Year
                     </option>
-                    <option value="2020">2020</option>
-                    <option value="2019">2019</option>
-                    <option value="2018">2018</option>
-                    <option value="2017">2017</option>
+                    {year.map((item) => (
+                        <option value={item}>{item}</option>
+                    ))}
                 </select>
             </div>
             <div className={styles.selectbox}>
-                <select id="types" name="types" onChange={(e) => setCategory(e.target.value)}>
-                    <option value="" hidden>
+                <select
+                    id="types"
+                    name="types"
+                    onChange={(e) => setCategory(e.target.value)}
+                >
+                    <option value="" >
                         Type
                     </option>
                     <option value="Action">Action</option>
@@ -49,6 +61,7 @@ function Searchbox() {
                     placeholder="Enter movie name here"
                     className="mr-5"
                     name="searchbox"
+                    value={searchBoxInput}
                     onChange={(e) => setSearchBoxInput(e.target.value)}
                 ></input>
                 <i className="bx bx-search"></i>

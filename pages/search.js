@@ -21,7 +21,8 @@ export default function Search() {
         setLoading(true);
         let filmBase = [];
         const { data } = await axios.get(
-            `http://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&s=` + router.query.name
+            `http://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&s=${router.query.name}${router.query.year ? "&y="+router.query.year : ""}` 
+             
         );
         // console.log(data.Search);
         // setSearchedMovie(data.Search);
@@ -38,7 +39,7 @@ export default function Search() {
 
         }
         
-    }, [router.query.name]);
+    }, [router.query.name,router.query.year]);
 
     const mapMovies = async (results) => {
         let filmData = [];
@@ -46,9 +47,9 @@ export default function Search() {
             const { data } = await axios.get(
                 `http://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&i=` + element.imdbID
             );
-            const { Title, Plot, Poster, Genre, Year, imdbRating } = data;
+            const { Title, Plot, Poster, Genre, Year, imdbRating,imdbID } = data;
 
-            filmData.push( { Title, Plot, Poster, Genre, Year, imdbRating });
+            filmData.push( { Title, Plot, Poster, Genre, Year, imdbRating,imdbID });
         });
         
         return filmData;

@@ -2,7 +2,25 @@ import { Nav, Navbar, Container } from "react-bootstrap";
 import Link from "next/link";
 import styles from "../../styles/Navigation.module.scss";
 
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+
 function Navigation() {
+    const router = useRouter();
+    const [searchBoxInput,setSearchBoxInput] = useState("");
+    
+    const handleClick = (e) => {
+        setSearchBoxInput("");
+        if (searchBoxInput.trim() != "") {
+            router.push({
+                pathname: "/search",
+                query: { name: searchBoxInput },
+            });
+            
+        }
+        setSearchBoxInput("");
+    };
+    
     return (
         <>
             <Navbar variant="light">
@@ -26,8 +44,10 @@ function Navigation() {
                             placeholder="Enter movie name here"
                             className="mr-5"
                             name="searchbox"
+                            value={searchBoxInput}
+                            onChange={(e) => setSearchBoxInput(e.target.value)}
                         ></input>
-                        <i className="bx bx-search"></i>
+                        <i className="bx bx-search" onClick={handleClick}></i>
                     </div>
                 </Container>
             </Navbar>
