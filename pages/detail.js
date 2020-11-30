@@ -17,7 +17,7 @@ export default function Detail() {
     useEffect(async () => {
         setLoading(true);
         const { data } = await axios.get(
-            `http://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&i=` + router.query.id
+            `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&i=` + router.query.id
         );
         console.log(data)
         setSearchedMovie(data)
