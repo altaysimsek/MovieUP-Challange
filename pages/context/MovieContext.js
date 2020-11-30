@@ -2,7 +2,7 @@ import React, { useState, createContext ,useEffect} from "react";
 
 export const MovieContext = createContext();
 
-export function MovieProvider({ children }) {
+export default function MovieProvider({ children }) {
     const [favoriteMovie, setFavoriteMovie] = useState([]);
     const addFavoriteMovie = (object) => {
         setFavoriteMovie([...favoriteMovie, object]);
@@ -17,3 +17,5 @@ export function MovieProvider({ children }) {
         </MovieContext.Provider>
     );
 }
+
+
