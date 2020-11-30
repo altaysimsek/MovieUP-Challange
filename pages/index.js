@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Container, Carousel } from "react-bootstrap";
 //External components
 import Searchbox from "./components/Searchbox";
-import PopularMovieCard from "./components/PopularMovieCard";
+import CarouselMovie from "./components/CarouselMovie";
 //Css
 import styles from "../styles/Home.module.scss";
 import React, { useState } from "react";
@@ -63,18 +63,7 @@ export default function Home() {
                 </div>
             </Container>
             <Container fluid>
-                <Carousel>
-                    {popMovies.map((movies) => (
-                        <Carousel.Item   interval={3500}>
-                            <div className="d-flex my-5 justify-content-center">
-                                <PopularMovieCard
-                                    key={movies.id}
-                                    details={movies}
-                                ></PopularMovieCard>
-                            </div>
-                        </Carousel.Item>
-                    ))}
-                </Carousel>
+                <CarouselMovie movies={popMovies}></CarouselMovie>
             </Container>
         </>
     );

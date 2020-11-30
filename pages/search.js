@@ -21,7 +21,7 @@ export default function Search() {
         setLoading(true);
         let filmBase = [];
         const { data } = await axios.get(
-            "http://www.omdbapi.com/?apikey=3e701bcb&s=" + router.query.name
+            `http://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&s=` + router.query.name
         );
         // console.log(data.Search);
         // setSearchedMovie(data.Search);
@@ -32,6 +32,10 @@ export default function Search() {
                 setLoading(false);
             },1000)
             
+        }else if(data.Error){
+            alert(data.Error)
+            setLoading(false);
+
         }
         
     }, [router.query.name]);
@@ -40,7 +44,7 @@ export default function Search() {
         let filmData = [];
         results.forEach(async (element,index) => {
             const { data } = await axios.get(
-                "http://www.omdbapi.com/?apikey=3e701bcb&i=" + element.imdbID
+                `http://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&i=` + element.imdbID
             );
             const { Title, Plot, Poster, Genre, Year, imdbRating } = data;
 
