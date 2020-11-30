@@ -1,6 +1,10 @@
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+
+**Before the run you need to create a .env.local file for store OMDB API
+there is a example on directory(.env.local.example)**
 
 First, run the development server:
 
