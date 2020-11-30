@@ -21,37 +21,52 @@ export default function Search() {
         setLoading(true);
         let filmBase = [];
         const { data } = await axios.get(
-            `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&s=${router.query.name}${router.query.year ? "&y="+router.query.year : ""}` 
-             
+            `https://www.omdbapi.com/?apikey=${
+                process.env.NEXT_PUBLIC_ENV_API_KEY
+            }&s=${router.query.name}${
+                router.query.year ? "&y=" + router.query.year : ""
+            }`
         );
         // console.log(data.Search);
         // setSearchedMovie(data.Search);
+
         if (data.Search) {
             filmBase = await mapMovies(data.Search);
-            setTimeout(() => {
-                setSearchedMovie(filmBase);
-                setLoading(false);
-            },1000)
-            
-        }else if(data.Error){
-            alert(data.Error)
+            setSearchedMovie(filmBase);
             setLoading(false);
-
+        } else if (data.Error) {
+            alert(data.Error);
+            setLoading(false);
         }
-        
-    }, [router.query.name,router.query.year]);
+    }, [router.query.name, router.query.year]);
 
     const mapMovies = async (results) => {
         let filmData = [];
-        results.forEach(async (element,index) => {
+        for (let i = 0; i < results.length; i++) {
             const { data } = await axios.get(
-                `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&i=` + element.imdbID
+                `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&i=` +
+                    results[i].imdbID
             );
-            const { Title, Plot, Poster, Genre, Year, imdbRating,imdbID } = data;
+            const {
+                Title,
+                Plot,
+                Poster,
+                Genre,
+                Year,
+                imdbRating,
+                imdbID,
+            } = data;
 
-            filmData.push( { Title, Plot, Poster, Genre, Year, imdbRating,imdbID });
-        });
-        
+            filmData.push({
+                Title,
+                Plot,
+                Poster,
+                Genre,
+                Year,
+                imdbRating,
+                imdbID,
+            });
+        }
         return filmData;
     };
 
