@@ -1,8 +1,8 @@
 import styles from "../../styles/PopularMovieCard.module.scss";
-import  MovieContext  from "../context/MovieContext";
+import MovieContext from "../../context/MovieContext";
 import { useContext } from "react";
 export default function ViewMovieCard({ details }) {
-    const { favoriteMovie, addFavoriteMovie } = useContext(MovieContext);
+    const {  addFavoriteMovie } = useContext(MovieContext);
     return (
         <>
             <div className={styles.popularMovieCard}>

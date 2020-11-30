@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import Head from "next/head";
-import  MovieContext  from "./context/MovieContext";
+import MovieContext from "../context/MovieContext";
 import styles from "../styles/SearchResult.module.scss";
 
 import {Container} from "react-bootstrap"

@@ -1,4 +1,4 @@
 import React, { createContext } from "react";
 
-const MovieContext = createContext();
+const MovieContext = React.createContext();
 export default MovieContext;

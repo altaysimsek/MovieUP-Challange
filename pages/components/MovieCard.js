@@ -1,12 +1,12 @@
 import styles from "../../styles/MovieCard.module.scss";
 import { useRouter } from "next/router";
-import MovieContext  from "../context/MovieContext";
+import MovieContext  from "../../context/MovieContext";
 import { useContext } from "react";
 
 export default function MovieCard({ movieDetail }) {
     const router = useRouter();
 
-    const { favoriteMovie, addFavoriteMovie } = useContext(MovieContext);
+    const { addFavoriteMovie } = useContext(MovieContext);
 
     const handleClick = () => {
         router.push({
