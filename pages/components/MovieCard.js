@@ -1,13 +1,13 @@
 import styles from "../../styles/MovieCard.module.scss";
 import { useRouter } from "next/router";
-import { MovieContext } from "../context/MovieContext";
-import {useContext} from "react"
+import MovieContext  from "../context/MovieContext";
+import { useContext } from "react";
 
 export default function MovieCard({ movieDetail }) {
     const router = useRouter();
-    
+
     const { favoriteMovie, addFavoriteMovie } = useContext(MovieContext);
-    
+
     const handleClick = () => {
         router.push({
             pathname: "/detail",
@@ -20,12 +20,8 @@ export default function MovieCard({ movieDetail }) {
             <div className={styles.movieCard}>
                 <div className={styles.image}>
                     <img
-                        src={
-                            movieDetail.Poster == "N/A"
-                                ? "/image/movieLogo.png"
-                                : movieDetail.Poster
-                        }
-                        alt="Movie Poster"
+                        src={movieDetail.Poster || "/image/movieLogo.png"}
+                        alt="MoviePoster"
                         onClick={handleClick}
                     ></img>
                     <div className={styles.details}>
@@ -53,4 +49,9 @@ export default function MovieCard({ movieDetail }) {
             </div>
         </>
     );
+}
+MovieCard.defaultProps = {
+    movieDetail:{
+        Poster:"/image/movieLogo.png"
+    }
 }

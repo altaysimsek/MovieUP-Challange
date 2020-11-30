@@ -4,7 +4,7 @@ export default function PopularMovieCard(props) {
         <>
             <div className={styles.popularMovieCard}>
                 <img
-                    src={props.details.imgUrl}
+                    src={props.details.imgUrl || "/image/movieLogo.png"}
                     className={styles.movieBanner}
                     
                     alt="movieBanner"
@@ -47,4 +47,10 @@ export default function PopularMovieCard(props) {
             </div>
         </>
     );
+}
+PopularMovieCard.defaultProps = {
+    details:{
+        imgUrl:"/image/movieLogo.png",
+        category:[]
+    }
 }

@@ -1,6 +1,6 @@
 import "../styles/globals.scss";
 import Navbar from "./components/Navbar";
-import MovieProvider from "./context/MovieContext";
+import MovieProvider from "./context/MovieWrapper";
 
 
 function MyApp({ Component, pageProps }) {

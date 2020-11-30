@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import Head from "next/head";
-import { MovieContext } from "./context/MovieContext";
+import  MovieContext  from "./context/MovieContext";
 import styles from "../styles/SearchResult.module.scss";
 
 import {Container} from "react-bootstrap"
@@ -21,7 +21,7 @@ export default function Favorite() {
             </div>
             <Container >
                 <div className="d-flex flex-wrap">
-                    {favoriteMovie.map(movie => (<MovieCard movieDetail={movie}></MovieCard>))}
+                    {favoriteMovie && favoriteMovie.map(movie => (<MovieCard movieDetail={movie}></MovieCard>))}
                 </div>
             </Container>
 

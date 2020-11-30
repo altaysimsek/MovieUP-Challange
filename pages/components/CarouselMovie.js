@@ -18,3 +18,7 @@ export default function CarouselMovie({ movies }) {
         </>
     );
 }
+CarouselMovie.defaultProps = {
+    movies:[],
+    
+}

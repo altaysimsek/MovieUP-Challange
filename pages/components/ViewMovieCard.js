@@ -1,12 +1,14 @@
 import styles from "../../styles/PopularMovieCard.module.scss";
-export default function ViewMovieCard({details}) {
+import  MovieContext  from "../context/MovieContext";
+import { useContext } from "react";
+export default function ViewMovieCard({ details }) {
+    const { favoriteMovie, addFavoriteMovie } = useContext(MovieContext);
     return (
         <>
             <div className={styles.popularMovieCard}>
                 <img
-                    src={details.Poster}
+                    src={details.Poster || "/image/movieLogo.png"}
                     className={styles.movieBanner}
-                    
                     alt="movieBanner"
                 ></img>
                 <div className={styles.details}>
@@ -16,7 +18,7 @@ export default function ViewMovieCard({details}) {
                             <span>{details.imdbRating}</span>
                         </div>
                         <div className={styles.category}>
-                        <span>{details.Genre}</span>
+                            <span>{details.Genre}</span>
                             {/* {details.Genre.split(",").map((item,index) => {
                                 if(index < 4){
                                     return <span>{item}</span>
@@ -29,9 +31,7 @@ export default function ViewMovieCard({details}) {
                             <span className={styles.year}>
                                 {details.Released}
                             </span>
-                            <span className={styles.name}>
-                                {details.Title}
-                            </span>
+                            <span className={styles.name}>{details.Title}</span>
                         </div>
                         <div className={styles.description}>
                             <p>
@@ -46,14 +46,18 @@ export default function ViewMovieCard({details}) {
                         </div>
                     </div>
                     <div className={styles.footer}>
-                        <button className={styles.btndefault}>
+                        <button className={styles.btndefault} onClick={() => addFavoriteMovie(details)}>
                             <i className="bx bxs-heart"></i>
                             Add to favorite
                         </button>
-                        
                     </div>
                 </div>
             </div>
         </>
     );
+}
+ViewMovieCard.defaultProps = {
+    details:{
+        Poster:"/image/movieLogo.png"
+    }
 }
