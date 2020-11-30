@@ -30,6 +30,7 @@ function Navigation() {
                             <img
                                 src="image/movieLogo.png"
                                 className="d-inline-block align-top"
+                                style={{cursor:"pointer"}}
                                 alt="movieUP Logo"
                             />
                         </Navbar.Brand>
