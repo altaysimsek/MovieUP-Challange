@@ -1,29 +1,30 @@
 import styles from "../../styles/MovieCard.module.scss";
-export default function MovieCard(props) {
+export default function MovieCard({movieDetail}) {
     return (
         <>
             <div className={styles.movieCard}>
                 <div className={styles.image}>
                     <img
-                        src="thegodfather.png"
+                        src={movieDetail.Poster == "N/A" ? "/image/movieLogo.png" : movieDetail.Poster}
+                        alt="Movie Poster"
                     ></img>
                     <div className={styles.details}>
                         <span>Biography</span>
                         <button>
-                            <i class="bx bx-heart"></i>
+                            <i className="bx bx-heart"></i>
                         </button>
                     </div>
                 </div>
                 <div className={styles.heading}>
                     <img src="imdb.png"></img>
-                    <span className={styles.rate}>8.8</span>
+                    <span className={styles.rate}>{movieDetail.imdbRating}</span>
                 </div>
                 <div className={styles.title}>
-                    <span className={styles.year}>2019</span>
-                    <span className={styles.movieName}>The Godfatherssssssssssssssssssssssssss</span>
+                    <span className={styles.year}>{movieDetail.year}</span>
+                    <span className={styles.movieName}>{movieDetail.Title}</span>
                 </div>
                 <div className={styles.footer}>
-                    <span>The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.</span>
+                    <span>{movieDetail.Plot}</span>
                 </div>
             </div>
         </>

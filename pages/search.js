@@ -5,21 +5,54 @@ import styles from "../styles/SearchResult.module.scss";
 import Head from "next/head";
 import MovieCard from "./components/MovieCard";
 
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+import { useState, useEffect } from "react";
 
 export default function Search() {
     const router = useRouter();
+
     const [searchedMovie, setSearchedMovie] = useState([]);
 
-    useEffect(() => {
+    const [loading, setLoading] = useState(false);
+
+    useEffect(async () => {
         // Update the document title using the browser API
-        console.log(router.query.name)
-        fetch("http://www.omdbapi.com/?apikey=3e701bcb&s=" + router.query.name)
-            .then((data) => data.json())
-            .then((results) => {
-                console.log(results.Search)
-                setSearchedMovie(results)});
-    },[router.query.name]);
+        setLoading(true);
+        let filmBase = [];
+        const { data } = await axios.get(
+            "http://www.omdbapi.com/?apikey=3e701bcb&s=" + router.query.name
+        );
+        // console.log(data.Search);
+        // setSearchedMovie(data.Search);
+        if (data.Search) {
+            filmBase = await mapMovies(data.Search);
+            setTimeout(() => {
+                setSearchedMovie(filmBase);
+                setLoading(false);
+            },1000)
+            
+        }
+        
+    }, [router.query.name]);
+
+    const mapMovies = async (results) => {
+        let filmData = [];
+        results.forEach(async (element,index) => {
+            const { data } = await axios.get(
+                "http://www.omdbapi.com/?apikey=3e701bcb&i=" + element.imdbID
+            );
+            const { Title, Plot, Poster, Genre, Year, imdbRating } = data;
+
+            filmData.push( { Title, Plot, Poster, Genre, Year, imdbRating });
+        });
+        
+        return filmData;
+    };
+
+    const renderMovie = searchedMovie.map((movie) => (
+        <MovieCard key={movie.imdbID} movieDetail={movie}></MovieCard>
+    ));
 
     return (
         <>
@@ -37,7 +70,9 @@ export default function Search() {
                 <div className={styles.title}>
                     Search result <span>{router.query.name}</span>
                 </div>
-                <div className={styles.movielist}>{searchedMovie.length > 0 && searchedMovie.map(movie => (movie))}</div>
+                <div className={styles.movielist}>
+                    {!loading ? renderMovie : <h1>Loading</h1>}
+                </div>
             </Container>
         </>
     );
