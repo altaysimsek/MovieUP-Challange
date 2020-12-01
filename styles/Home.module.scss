@@ -9,6 +9,7 @@
     padding:8% 15%;
     color:white;
     h1{
+        
         font-size:65px;
         font-weight: 500;
     }
@@ -33,4 +34,12 @@
         font-weight: 500;
         cursor: pointer;
     }
+}
+@media only screen and (max-width:360px) {
+    .branding{
+        h1{
+            font-size:50px;
+        }
+    }
+    
 }

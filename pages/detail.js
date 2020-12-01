@@ -1,28 +1,32 @@
-import { Container } from "react-bootstrap";
-
-import { useRouter } from "next/router";
-import styles from "../styles/SearchResult.module.scss";
 import Head from "next/head";
-
-import ViewMovieCard from "./components/ViewMovieCard"
-import axios from "axios";
+import { useRouter } from "next/router";
 
 import { useState, useEffect } from "react";
+
+import styles from "../styles/SearchResult.module.scss";
+
+import { Container } from "react-bootstrap";
+import ViewMovieCard from "./components/ViewMovieCard";
+
+import axios from "axios";
 
 export default function Detail() {
     const router = useRouter();
 
     const [searchedMovie, setSearchedMovie] = useState({});
     const [loading, setLoading] = useState(false);
+    
     useEffect(async () => {
         setLoading(true);
+        //We are gettin' data by id
         const { data } = await axios.get(
-            `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&i=` + router.query.id
+            `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&i=` +
+                router.query.id
         );
-        console.log(data)
-        setSearchedMovie(data)
+
+        setSearchedMovie(data);
         setLoading(false);
-    },[])
+    }, []);
 
     return (
         <>
@@ -36,7 +40,11 @@ export default function Detail() {
             </div>
 
             <Container className="mt-5">
-                {loading ? <h1>Loading</h1> : <ViewMovieCard details={searchedMovie}></ViewMovieCard>}
+                {loading ? (
+                    <h1>Loading</h1>
+                ) : (
+                    <ViewMovieCard details={searchedMovie}></ViewMovieCard>
+                )}
             </Container>
         </>
     );

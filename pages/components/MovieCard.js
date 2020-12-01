@@ -1,32 +1,36 @@
-import styles from "../../styles/MovieCard.module.scss";
 import { useRouter } from "next/router";
-import MovieContext  from "../../context/MovieContext";
-import { useContext,useEffect,useState } from "react";
+
+import { useContext, useEffect, useState } from "react";
+
+import styles from "../../styles/MovieCard.module.scss";
+
+import MovieContext from "../../context/MovieContext";
 
 export default function MovieCard({ movieDetail }) {
     const router = useRouter();
     const [isFavorite, setIsFavorite] = useState(false);
-    const { addFavoriteMovie,removeFavoriteMovie } = useContext(MovieContext);
-    useEffect(() => {
-        const data = JSON.parse(localStorage.getItem("favoriteMovies"));
-        const item = data.filter(movie => movie.imdbID == movieDetail.imdbID)
-        if(item.length != 0){
-            setIsFavorite(true);
-        }else{
-            setIsFavorite(false);
-        }
-    },[])
-    useEffect(() => {
-        const data = JSON.parse(localStorage.getItem("favoriteMovies"));
-        const item = data.filter(movie => movie.imdbID == movieDetail.imdbID)
-        if(item.length != 0){
-            setIsFavorite(true);
-        }else{
-            setIsFavorite(false);
-        }
-    },[isFavorite])
+    const { addFavoriteMovie, removeFavoriteMovie } = useContext(MovieContext);
     
-
+    //We are using useEffect for marking favorite movies
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("favoriteMovies"));
+        const item = data.filter((movie) => movie.imdbID == movieDetail.imdbID);
+        if (item.length != 0) {
+            setIsFavorite(true);
+        } else {
+            setIsFavorite(false);
+        }
+    }, []);
+    //Is the favorite state changed uptade the local favorite state 
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("favoriteMovies"));
+        const item = data.filter((movie) => movie.imdbID == movieDetail.imdbID);
+        if (item.length != 0) {
+            setIsFavorite(true);
+        } else {
+            setIsFavorite(false);
+        }
+    }, [isFavorite]);
 
     const handleClick = () => {
         router.push({
@@ -35,14 +39,14 @@ export default function MovieCard({ movieDetail }) {
         });
     };
     const handleAddOrRemove = () => {
-        if(isFavorite){
-            removeFavoriteMovie(movieDetail.imdbID)
+        if (isFavorite) {
+            removeFavoriteMovie(movieDetail.imdbID);
             setIsFavorite(false);
-        }else{
-            addFavoriteMovie(movieDetail)
+        } else {
+            addFavoriteMovie(movieDetail);
             setIsFavorite(true);
-        }  
-    }
+        }
+    };
 
     return (
         <>
@@ -55,7 +59,14 @@ export default function MovieCard({ movieDetail }) {
                     ></img>
                     <div className={styles.details}>
                         <span>{movieDetail.Genre}</span>
-                        <button className={isFavorite ? styles.favoriteButton : styles.defButton} onClick={handleAddOrRemove}>
+                        <button
+                            className={
+                                isFavorite
+                                    ? styles.favoriteButton
+                                    : styles.defButton
+                            }
+                            onClick={handleAddOrRemove}
+                        >
                             <i className="bx bx-heart"></i>
                         </button>
                     </div>
@@ -80,7 +91,7 @@ export default function MovieCard({ movieDetail }) {
     );
 }
 MovieCard.defaultProps = {
-    movieDetail:{
-        Poster:"/image/movieLogo.png"
-    }
-}
+    movieDetail: {
+        Poster: "/image/movieLogo.png",
+    },
+};

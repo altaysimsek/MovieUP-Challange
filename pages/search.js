@@ -1,24 +1,28 @@
+import { useRouter } from "next/router";
+import Head from "next/head";
+
+import { useState, useEffect } from "react";
+
+import styles from "../styles/SearchResult.module.scss";
+
 import { Container } from "react-bootstrap";
 import Searchbox from "./components/Searchbox";
-import { useRouter } from "next/router";
-import styles from "../styles/SearchResult.module.scss";
-import Head from "next/head";
 import MovieCard from "./components/MovieCard";
 
 import axios from "axios";
-
-import { useState, useEffect } from "react";
 
 export default function Search() {
     const router = useRouter();
 
     const [searchedMovie, setSearchedMovie] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    
+    //this use effect works only the queries changed
     useEffect(async () => {
         // Update the document title using the browser API
         setLoading(true);
         let filmBase = [];
+        //First fetch to getting one page movie data
         const { data } = await axios.get(
             `https://www.omdbapi.com/?apikey=${
                 process.env.NEXT_PUBLIC_ENV_API_KEY
@@ -26,10 +30,8 @@ export default function Search() {
                 router.query.year ? "&y=" + router.query.year : ""
             }${router.query.type ? "&type=" + router.query.type : ""}`
         );
-        // console.log(data.Search);
-        // setSearchedMovie(data.Search);
-
         if (data.Search) {
+            //After this we calling mapMovies for fetch more detail for every movie come from data and changing our state
             filmBase = await mapMovies(data.Search);
             setSearchedMovie(filmBase);
             setLoading(false);
@@ -37,7 +39,9 @@ export default function Search() {
             alert(data.Error);
             setLoading(false);
         }
-    }, [router.query.name, router.query.year]);
+    }, [router.query.name, router.query.year,router.query.type]);
+
+    //We need to make double fetch to getting more details, it's function for handle this
 
     const mapMovies = async (results) => {
         let filmData = [];
@@ -69,6 +73,7 @@ export default function Search() {
         return filmData;
     };
 
+    //Render function to handle rendering movie
     const renderMovie = searchedMovie.map((movie) => (
         <MovieCard key={movie.imdbID} movieDetail={movie}></MovieCard>
     ));

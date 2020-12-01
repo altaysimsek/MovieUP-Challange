@@ -1,22 +1,26 @@
-import styles from "../../styles/Searchbox.module.scss";
 import { useRouter } from "next/router";
+
 import React, { useState } from "react";
+
+import styles from "../../styles/Searchbox.module.scss";
+
 function Searchbox() {
     const [searchBoxInput, setSearchBoxInput] = useState("");
     const [selectYear, setSelectYear] = useState("");
     const [selectCategory, setCategory] = useState("");
     const router = useRouter();
 
+    //We are changing the which query goes to nextpage
     const handleClick = (e) => {
         setSearchBoxInput("");
-        
+
         if (searchBoxInput.trim() != "") {
-            let queryObj = {name: searchBoxInput}
-            if(selectYear != ""){
-               queryObj = { ...queryObj, year: selectYear }
+            let queryObj = { name: searchBoxInput };
+            if (selectYear != "") {
+                queryObj = { ...queryObj, year: selectYear };
             }
-            if(selectCategory != ""){
-                queryObj = { ...queryObj, type: selectCategory }
+            if (selectCategory != "") {
+                queryObj = { ...queryObj, type: selectCategory };
             }
             router.push({
                 pathname: "/search",
@@ -36,9 +40,7 @@ function Searchbox() {
                     name="years"
                     onChange={(e) => setSelectYear(e.target.value)}
                 >
-                    <option value="" >
-                        Year
-                    </option>
+                    <option value="">Year</option>
                     {year.map((item) => (
                         <option value={item}>{item}</option>
                     ))}
@@ -50,9 +52,7 @@ function Searchbox() {
                     name="types"
                     onChange={(e) => setCategory(e.target.value)}
                 >
-                    <option value="" >
-                        Type
-                    </option>
+                    <option value="">Type</option>
                     <option value="movie">Movie</option>
                     <option value="series">Series</option>
                     <option value="episode">Episode</option>

@@ -1,13 +1,16 @@
-import React, { useState, useContext } from "react";
 import Head from "next/head";
+
+import React, { useContext } from "react";
+
+import { Container } from "react-bootstrap";
+import MovieCard from "./components/MovieCard";
 import MovieContext from "../context/MovieContext";
+
 import styles from "../styles/SearchResult.module.scss";
 
-import {Container} from "react-bootstrap"
-import MovieCard from "./components/MovieCard"
-
 export default function Favorite() {
-    const { favoriteMovie, addFavoriteMovie } = useContext(MovieContext);
+    //Getting movie data from context
+    const { favoriteMovie } = useContext(MovieContext);
 
     return (
         <>
@@ -19,12 +22,14 @@ export default function Favorite() {
                 <span className={styles.directory}>Home / </span>
                 <span>Favorite</span>
             </div>
-            <Container >
-                <div className="d-flex flex-wrap">
-                    {favoriteMovie && favoriteMovie.map(movie => (<MovieCard movieDetail={movie}></MovieCard>))}
+            <Container>
+                <div className={styles.movielist}>
+                    {favoriteMovie &&
+                        favoriteMovie.map((movie) => (
+                            <MovieCard movieDetail={movie}></MovieCard>
+                        ))}
                 </div>
             </Container>
-
         </>
     );
 }

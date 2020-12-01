@@ -9,6 +9,7 @@ function Navigation() {
     const router = useRouter();
     const [searchBoxInput,setSearchBoxInput] = useState("");
     
+    //Clean the input after search
     const handleClick = (e) => {
         setSearchBoxInput("");
         if (searchBoxInput.trim() != "") {

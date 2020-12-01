@@ -1,11 +1,15 @@
 import styles from "../../styles/PopularMovieCard.module.scss";
-import MovieContext from "../../context/MovieContext";
+
 import { useContext,useState,useEffect } from "react";
+
+import MovieContext from "../../context/MovieContext";
+
 export default function ViewMovieCard({ details }) {
     const {  addFavoriteMovie,removeFavoriteMovie } = useContext(MovieContext);
     const [isFavorite, setIsFavorite] = useState(false);
     
     useEffect(() => {
+        //We are using useEffect for marking favorite movies
         const data = JSON.parse(localStorage.getItem("favoriteMovies"));
         const item = data.filter(movie => movie.imdbID == details.imdbID)
         if(item.length != 0){
@@ -15,6 +19,7 @@ export default function ViewMovieCard({ details }) {
         }
     },[])
     
+    //Changing the which function works by state of favorite
     const handleAddOrRemove = () => {
         if(isFavorite){
             removeFavoriteMovie(details.imdbID)
@@ -40,11 +45,6 @@ export default function ViewMovieCard({ details }) {
                         </div>
                         <div className={styles.category}>
                             <span>{details.Genre}</span>
-                            {/* {details.Genre.split(",").map((item,index) => {
-                                if(index < 4){
-                                    return <span>{item}</span>
-                                }
-                            })} */}
                         </div>
                     </div>
                     <div className={styles.aboutMovie}>

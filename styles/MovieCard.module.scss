@@ -34,6 +34,7 @@
                 justify-content: center;
                 background-color: #f5c518;
                 padding: 0.75rem;
+                margin-left: 10px;
                 box-shadow: 0px 14px 26px rgba(39, 13, 48, 0.25);
                 transform: matrix(-1, 0, 0, 1, 0, 0);
                 transition: 0.25s ease;
@@ -52,6 +53,7 @@
             }
             .defButton {
                 border: none;
+                margin-left: 10px;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
