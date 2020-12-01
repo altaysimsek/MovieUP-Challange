@@ -16,6 +16,15 @@ export default function MovieCard({ movieDetail }) {
             setIsFavorite(false);
         }
     },[])
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("favoriteMovies"));
+        const item = data.filter(movie => movie.imdbID == movieDetail.imdbID)
+        if(item.length != 0){
+            setIsFavorite(true);
+        }else{
+            setIsFavorite(false);
+        }
+    },[isFavorite])
     
 
 
