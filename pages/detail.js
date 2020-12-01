@@ -41,7 +41,7 @@ export default function Detail() {
 
             <Container className="mt-5">
                 {loading ? (
-                    <h1>Loading</h1>
+                    <div className="d-flex justify-content-center align-items-center w-100"><img src="loading.gif"></img></div>
                 ) : (
                     <ViewMovieCard details={searchedMovie}></ViewMovieCard>
                 )}

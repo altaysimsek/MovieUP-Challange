@@ -38,9 +38,9 @@ export default function ViewMovieCard({ details }) {
             <div className={styles.popularMovieCard}>
                 <img
                     src={
-                        movieDetail.Poster == "N/A"
+                        details.Poster == "N/A"
                             ? "/image/placeholder.png"
-                            : "" || movieDetail.Poster || "/image/movieLogo.png"
+                            : "" || details.Poster || "/image/movieLogo.png"
                     }
                     onError={handleImage}
                     className={styles.movieBanner}
