@@ -13,7 +13,6 @@ export default function Search() {
     const router = useRouter();
 
     const [searchedMovie, setSearchedMovie] = useState([]);
-
     const [loading, setLoading] = useState(false);
 
     useEffect(async () => {

@@ -6,10 +6,16 @@ export default function MovieProvider({ children }) {
     const [favoriteMovie, setFavoriteMovie] = useState([]);
 
     const addFavoriteMovie = async (object) => {
-            setFavoriteMovie([...favoriteMovie, object]);
-            const data = JSON.parse(localStorage.getItem("favoriteMovies"));
-            data.push(object);
-            localStorage.setItem("favoriteMovies", JSON.stringify(data));  
+        setFavoriteMovie([...favoriteMovie, object]);
+        const data = JSON.parse(localStorage.getItem("favoriteMovies"));
+        data.push(object);
+        localStorage.setItem("favoriteMovies", JSON.stringify(data));
+    };
+    const removeFavoriteMovie = async (imdbID) => {
+        const newMovie = favoriteMovie.filter(movie => movie.imdbID != imdbID)
+        setFavoriteMovie(newMovie);
+        localStorage.setItem("favoriteMovies", JSON.stringify(newMovie));
+
     };
 
     useEffect(() => {
@@ -19,11 +25,11 @@ export default function MovieProvider({ children }) {
                 JSON.parse(localStorage.getItem("favoriteMovies"))
             );
         } else {
-            localStorage.setItem("favoriteMovies", JSON.stringify([]));  
+            localStorage.setItem("favoriteMovies", JSON.stringify([]));
         }
     }, []);
     return (
-        <MovieContext.Provider value={{ favoriteMovie, addFavoriteMovie }}>
+        <MovieContext.Provider value={{ favoriteMovie, addFavoriteMovie,removeFavoriteMovie }}>
             {children}
         </MovieContext.Provider>
     );

@@ -22,15 +22,27 @@ export default function Home() {
                 "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son",
         },
         {
-            id: 1,
+            id: 2,
+            imdbRate: "7.8",
             imgUrl:
-                "https://images-na.ssl-images-amazon.com/images/I/81cw8NVT36L._SX342_.jpg",
-            imdbRate: "8.8",
-            year:"2019",
-            category: ["Action", "Race"],
-            movieName: "The TokyoDrift",
+                "https://m.media-amazon.com/images/M/MV5BYzg0NGM2NjAtNmIxOC00MDJmLTg5ZmYtYzM0MTE4NWE2NzlhXkEyXkFqcGdeQXVyMTA4NjE0NjEy._V1_SX300.jpg",
+            category: ["Action", "Sci-fi"],
+            year:"2020",
+            movieName: "Tenet",
             description:
-                "Arabalar burada yarışır",
+                "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time."
+        },
+        
+        {
+            id: 3,
+            imdbRate: "7.1",
+            imgUrl:
+                "https://m.media-amazon.com/images/M/MV5BMTM3NTg2NDQzOF5BMl5BanBnXkFtZTcwNjc2NzQzOQ@@._V1_SX300.jpg",
+            category: ["Action", "Adventure"],
+            year:"2013",
+            movieName: "Fast & Furious 6",
+            description:
+                "Hobbs has Dominic and Brian reassemble their crew to take down a team of mercenaries: Dominic unexpectedly gets sidetracked with facing his presumed deceased girlfriend, Letty."
         },
     ]);
 

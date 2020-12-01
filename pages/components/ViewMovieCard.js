@@ -1,8 +1,29 @@
 import styles from "../../styles/PopularMovieCard.module.scss";
 import MovieContext from "../../context/MovieContext";
-import { useContext } from "react";
+import { useContext,useState,useEffect } from "react";
 export default function ViewMovieCard({ details }) {
-    const {  addFavoriteMovie } = useContext(MovieContext);
+    const {  addFavoriteMovie,removeFavoriteMovie } = useContext(MovieContext);
+    const [isFavorite, setIsFavorite] = useState(false);
+    
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("favoriteMovies"));
+        const item = data.filter(movie => movie.imdbID == details.imdbID)
+        if(item.length != 0){
+            setIsFavorite(true);
+        }else{
+            setIsFavorite(false);
+        }
+    },[])
+    
+    const handleAddOrRemove = () => {
+        if(isFavorite){
+            removeFavoriteMovie(details.imdbID)
+            setIsFavorite(false);
+        }else{
+            addFavoriteMovie(details)
+            setIsFavorite(true);
+        }  
+    }
     return (
         <>
             <div className={styles.popularMovieCard}>
@@ -46,9 +67,9 @@ export default function ViewMovieCard({ details }) {
                         </div>
                     </div>
                     <div className={styles.footer}>
-                        <button className={styles.btndefault} onClick={() => addFavoriteMovie(details)}>
+                        <button className={isFavorite ? styles.btnfavorite : styles.btndefault} onClick={handleAddOrRemove}>
                             <i className="bx bxs-heart"></i>
-                            Add to favorite
+                            {isFavorite ? "Remove from favorite" : "Add to favorite"}
                         </button>
                     </div>
                 </div>

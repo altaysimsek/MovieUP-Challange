@@ -76,6 +76,10 @@
                 padding: 1rem;
                 border-radius: 8px;
                 margin-right: 48px;
+                transition: .18s ease;
+                &:hover{
+                    background-color: #d4ab15;
+                }
             }
             .btnfavorite{
                 display: flex;

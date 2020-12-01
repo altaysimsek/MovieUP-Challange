@@ -1,12 +1,23 @@
 import styles from "../../styles/MovieCard.module.scss";
 import { useRouter } from "next/router";
 import MovieContext  from "../../context/MovieContext";
-import { useContext } from "react";
+import { useContext,useEffect,useState } from "react";
 
 export default function MovieCard({ movieDetail }) {
     const router = useRouter();
+    const [isFavorite, setIsFavorite] = useState(false);
+    const { addFavoriteMovie,removeFavoriteMovie } = useContext(MovieContext);
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("favoriteMovies"));
+        const item = data.filter(movie => movie.imdbID == movieDetail.imdbID)
+        if(item.length != 0){
+            setIsFavorite(true);
+        }else{
+            setIsFavorite(false);
+        }
+    },[])
+    
 
-    const { addFavoriteMovie } = useContext(MovieContext);
 
     const handleClick = () => {
         router.push({
@@ -14,6 +25,15 @@ export default function MovieCard({ movieDetail }) {
             query: { id: movieDetail.imdbID },
         });
     };
+    const handleAddOrRemove = () => {
+        if(isFavorite){
+            removeFavoriteMovie(movieDetail.imdbID)
+            setIsFavorite(false);
+        }else{
+            addFavoriteMovie(movieDetail)
+            setIsFavorite(true);
+        }  
+    }
 
     return (
         <>
@@ -26,7 +46,7 @@ export default function MovieCard({ movieDetail }) {
                     ></img>
                     <div className={styles.details}>
                         <span>{movieDetail.Genre}</span>
-                        <button onClick={() => addFavoriteMovie(movieDetail)}>
+                        <button className={isFavorite ? styles.favoriteButton : styles.defButton} onClick={handleAddOrRemove}>
                             <i className="bx bx-heart"></i>
                         </button>
                     </div>
