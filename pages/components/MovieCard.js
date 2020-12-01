@@ -10,7 +10,7 @@ export default function MovieCard({ movieDetail }) {
     const router = useRouter();
     const [isFavorite, setIsFavorite] = useState(false);
     const { addFavoriteMovie, removeFavoriteMovie } = useContext(MovieContext);
-    
+
     //We are using useEffect for marking favorite movies
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("favoriteMovies"));
@@ -21,7 +21,7 @@ export default function MovieCard({ movieDetail }) {
             setIsFavorite(false);
         }
     }, []);
-    //Is the favorite state changed uptade the local favorite state 
+    //Is the favorite state changed uptade the local favorite state
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("favoriteMovies"));
         const item = data.filter((movie) => movie.imdbID == movieDetail.imdbID);
@@ -47,13 +47,23 @@ export default function MovieCard({ movieDetail }) {
             setIsFavorite(true);
         }
     };
+    const handleImage = (ev) => {
+        ev.target.src = "/image/placeholder.png";
+    };
 
     return (
         <>
             <div className={styles.movieCard}>
                 <div className={styles.image}>
                     <img
-                        src={movieDetail.Poster || "/image/movieLogo.png"}
+                        src={
+                            movieDetail.Poster == "N/A"
+                                ? "/image/placeholder.png"
+                                : "" ||
+                                  movieDetail.Poster ||
+                                  "/image/movieLogo.png"
+                        }
+                        onError={handleImage}
                         alt="MoviePoster"
                         onClick={handleClick}
                     ></img>

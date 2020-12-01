@@ -1,39 +1,48 @@
 import styles from "../../styles/PopularMovieCard.module.scss";
 
-import { useContext,useState,useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import MovieContext from "../../context/MovieContext";
 
 export default function ViewMovieCard({ details }) {
-    const {  addFavoriteMovie,removeFavoriteMovie } = useContext(MovieContext);
+    const { addFavoriteMovie, removeFavoriteMovie } = useContext(MovieContext);
     const [isFavorite, setIsFavorite] = useState(false);
-    
+
     useEffect(() => {
         //We are using useEffect for marking favorite movies
         const data = JSON.parse(localStorage.getItem("favoriteMovies"));
-        const item = data.filter(movie => movie.imdbID == details.imdbID)
-        if(item.length != 0){
+        const item = data.filter((movie) => movie.imdbID == details.imdbID);
+        if (item.length != 0) {
             setIsFavorite(true);
-        }else{
+        } else {
             setIsFavorite(false);
         }
-    },[])
-    
+    }, []);
+
     //Changing the which function works by state of favorite
     const handleAddOrRemove = () => {
-        if(isFavorite){
-            removeFavoriteMovie(details.imdbID)
+        if (isFavorite) {
+            removeFavoriteMovie(details.imdbID);
             setIsFavorite(false);
-        }else{
-            addFavoriteMovie(details)
+        } else {
+            addFavoriteMovie(details);
             setIsFavorite(true);
-        }  
-    }
+        }
+    };
+
+    const handleImage = (ev) => {
+        ev.target.src = "/image/placeholder.png";
+    };
     return (
         <>
             <div className={styles.popularMovieCard}>
                 <img
-                    src={details.Poster || "/image/movieLogo.png"}
+                    src={
+                        movieDetail.Poster == "N/A"
+                            ? "/image/placeholder.png"
+                            : "" || movieDetail.Poster || "/image/movieLogo.png"
+                    }
+                    onError={handleImage}
                     className={styles.movieBanner}
                     alt="movieBanner"
                 ></img>
@@ -67,9 +76,18 @@ export default function ViewMovieCard({ details }) {
                         </div>
                     </div>
                     <div className={styles.footer}>
-                        <button className={isFavorite ? styles.btnfavorite : styles.btndefault} onClick={handleAddOrRemove}>
+                        <button
+                            className={
+                                isFavorite
+                                    ? styles.btnfavorite
+                                    : styles.btndefault
+                            }
+                            onClick={handleAddOrRemove}
+                        >
                             <i className="bx bxs-heart"></i>
-                            {isFavorite ? "Remove from favorite" : "Add to favorite"}
+                            {isFavorite
+                                ? "Remove from favorite"
+                                : "Add to favorite"}
                         </button>
                     </div>
                 </div>
@@ -78,7 +96,7 @@ export default function ViewMovieCard({ details }) {
     );
 }
 ViewMovieCard.defaultProps = {
-    details:{
-        Poster:"/image/movieLogo.png"
-    }
-}
+    details: {
+        Poster: "/image/movieLogo.png",
+    },
+};

@@ -21,6 +21,11 @@ function Navigation() {
         }
         setSearchBoxInput("");
     };
+    const handleEnterPress = (e) => {
+        if(e.key === "Enter"){
+            handleClick()
+        }
+    }
     
     return (
         <>
@@ -48,6 +53,7 @@ function Navigation() {
                             className="mr-5"
                             name="searchbox"
                             value={searchBoxInput}
+                            onKeyPress={handleEnterPress}
                             onChange={(e) => setSearchBoxInput(e.target.value)}
                         ></input>
                         <i className="bx bx-search" onClick={handleClick}></i>

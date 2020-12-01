@@ -95,7 +95,7 @@ export default function Search() {
                     Search result <span>{router.query.name}</span>
                 </div>
                 <div className={styles.movielist}>
-                    {!loading ? renderMovie : <h1>Loading</h1>}
+                    {!loading ? renderMovie : <div className="d-flex justify-content-center align-items-center w-100"><img src="loading.gif"></img></div>}
                 </div>
             </Container>
         </>

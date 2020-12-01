@@ -11,7 +11,7 @@ function Searchbox() {
     const router = useRouter();
 
     //We are changing the which query goes to nextpage
-    const handleClick = (e) => {
+    const handleClick = () => {
         setSearchBoxInput("");
 
         if (searchBoxInput.trim() != "") {
@@ -28,6 +28,13 @@ function Searchbox() {
             });
         }
     };
+
+    const handleEnterPress = (e) => {
+        if(e.key === "Enter"){
+            handleClick()
+        }
+    }
+
     let year = [];
     for (let i = 2020; i > 1900; i--) {
         year.push(i);
@@ -65,6 +72,7 @@ function Searchbox() {
                     className="mr-5"
                     name="searchbox"
                     value={searchBoxInput}
+                    onKeyPress={handleEnterPress}
                     onChange={(e) => setSearchBoxInput(e.target.value)}
                 ></input>
                 <i className="bx bx-search"></i>
