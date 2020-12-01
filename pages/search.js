@@ -25,7 +25,7 @@ export default function Search() {
                 process.env.NEXT_PUBLIC_ENV_API_KEY
             }&s=${router.query.name}${
                 router.query.year ? "&y=" + router.query.year : ""
-            }`
+            }${router.query.type ? "&type=" + router.query.type : ""}`
         );
         // console.log(data.Search);
         // setSearchedMovie(data.Search);

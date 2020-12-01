@@ -9,10 +9,14 @@ function Searchbox() {
 
     const handleClick = (e) => {
         setSearchBoxInput("");
+        
         if (searchBoxInput.trim() != "") {
             let queryObj = {name: searchBoxInput}
             if(selectYear != ""){
-               queryObj = { name: searchBoxInput, year: selectYear }
+               queryObj = { ...queryObj, year: selectYear }
+            }
+            if(selectCategory != ""){
+                queryObj = { ...queryObj, type: selectCategory }
             }
             router.push({
                 pathname: "/search",
@@ -49,10 +53,9 @@ function Searchbox() {
                     <option value="" >
                         Type
                     </option>
-                    <option value="Action">Action</option>
-                    <option value="Sci-fi">Sci-fi</option>
-                    <option value="Adventure">Adventure</option>
-                    <option value="Romantic">Romantic</option>
+                    <option value="movie">Movie</option>
+                    <option value="series">Series</option>
+                    <option value="episode">Episode</option>
                 </select>
             </div>
             <div className={styles.inputbox}>
