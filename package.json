@@ -14,6 +14,7 @@
     "react": "17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "17.0.1",
+    "react-paginate": "^6.5.0",
     "sass": "^1.29.0"
   }
 }

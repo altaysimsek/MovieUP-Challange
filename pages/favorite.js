@@ -30,6 +30,7 @@ export default function Favorite() {
                         ))}
                 </div>
             </Container>
+            
         </>
     );
 }
