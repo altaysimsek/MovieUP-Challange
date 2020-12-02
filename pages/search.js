@@ -37,7 +37,7 @@ export default function Search() {
                 "&page=" + currentPage
             }`
         );
-
+        
         if (data.Search) {
             //After this we calling mapMovies for fetch more detail for every movie come from data and changing our state
             setLoading(true);
@@ -59,7 +59,7 @@ export default function Search() {
         let filmData = [];
         for (let i = 0; i < results.length; i++) {
             const { data } = await axios.get(
-                `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&i=` +
+                `/api/getdetail?id=` +
                     results[i].imdbID
             );
             const {
