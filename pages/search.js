@@ -27,17 +27,15 @@ export default function Search() {
         setLoading(true);
         let filmBase = [];
         //First fetch to getting one page movie data
-        
+
         const { data } = await axios.get(
-            `https://www.omdbapi.com/?apikey=${
-                process.env.NEXT_PUBLIC_ENV_API_KEY
-            }&s=${router.query.name}${
-                router.query.year ? "&y=" + router.query.year : ""
+            `/api/getmovie/?name=${router.query.name}${
+                router.query.year ? "&year=" + router.query.year : ""
             }${router.query.type ? "&type=" + router.query.type : ""}${
                 "&page=" + currentPage
             }`
         );
-        
+
         if (data.Search) {
             //After this we calling mapMovies for fetch more detail for every movie come from data and changing our state
             setLoading(true);
@@ -59,8 +57,7 @@ export default function Search() {
         let filmData = [];
         for (let i = 0; i < results.length; i++) {
             const { data } = await axios.get(
-                `/api/getdetail?id=` +
-                    results[i].imdbID
+                `/api/getdetail?id=` + results[i].imdbID
             );
             const {
                 Title,
@@ -92,7 +89,7 @@ export default function Search() {
 
     const handlePageClick = (data) => {
         let selected = data.selected + 1;
-        console.log(selected)
+        console.log(selected);
         setCurrentPage(selected);
     };
     return (

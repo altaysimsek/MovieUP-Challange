@@ -20,8 +20,7 @@ export default function Detail() {
         setLoading(true);
         //We are gettin' data by id
         const { data } = await axios.get(
-            `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_ENV_API_KEY}&i=` +
-                router.query.id
+            `/api/getdetail?id=` + router.query.id
         );
 
         setSearchedMovie(data);
