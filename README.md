@@ -10,6 +10,7 @@ You can search any movie on this platform and if you like anyone you can keep th
 - Movies have detail page.
 - There is favorite page for list your favorite movies.
 
+❗ Popular movies at homepage is not working because it uses dummy data 
 
 ---
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
