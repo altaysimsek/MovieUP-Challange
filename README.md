@@ -1,4 +1,17 @@
 
+# 🐲MovieUP
+This project developed for 90pixel's frontend challange.
+You can search any movie on this platform and if you like anyone you can keep this movie as a favorite.
+
+
+## 🎈 Features
+- Search any movie by year , type, name.
+- Keep your movie as favorite (Uses localstorage).
+- Movies have detail page.
+- There is favorite page for list your favorite movies.
+
+
+---
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
