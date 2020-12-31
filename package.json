@@ -1,20 +1,30 @@
 {
-  "name": "pixel90",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "axios": "^0.21.0",
-    "bootstrap": "^4.5.3",
-    "next": "10.0.3",
-    "react": "17.0.1",
-    "react-bootstrap": "^1.4.0",
-    "react-dom": "17.0.1",
-    "react-paginate": "^6.5.0",
-    "sass": "^1.29.0"
-  }
+    "name": "pixel90",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
+    },
+    "dependencies": {
+        "axios": "^0.21.0",
+        "bootstrap": "^4.5.3",
+        "next": "10.0.3",
+        "react": "17.0.1",
+        "react-bootstrap": "^1.4.0",
+        "react-dom": "17.0.1",
+        "react-paginate": "^6.5.0",
+        "sass": "^1.29.0"
+    },
+    "devDependencies": {
+        "eslint": "^7.16.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react-hooks": "^4.2.0"
+    }
 }
